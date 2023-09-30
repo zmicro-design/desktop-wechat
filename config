@@ -1,0 +1,8 @@
+#!/bin/bash
+
+export DESKTOP_CORE_NAME="wechat"
+export DESKTOP_CORE_BIN_NAME="$DESKTOP_CORE_NAME"
+export DESKTOP_CORE_VERSION=latest
+export DESKTOP_CORE_ORG="qq"
+
+export DESKTOP_CORE_RELEASE_DOWNLOAD="https://dldir1.qq.com/weixin"

@@ -1,0 +1,45 @@
+#!/bin/bash
+
+export DESKTOP_NAME="wechat"
+import "$ZMICRO_DESKTOPS_PATH/$DESKTOP_NAME/config"
+import "$ZMICRO_DESKTOPS_PATH/$DESKTOP_NAME/core"
+
+help() {
+  echo "Usage:"
+  echo "  zmicro wechat <args ...>"
+  echo ""
+
+  wechat --help
+}
+
+version() {
+  wechat --version
+}
+
+core() {
+  # context directory
+  local context="$ZMICRO_DESKTOPS_DATA_PATH/wechat"
+  if [ ! -d "$context" ]; then
+    mkdir -p $context
+  fi
+  cd $context
+  # context directory
+
+  case $1 in
+  -h | --help | help)
+    help
+    ;;
+  -v | --version | version)
+    version
+    ;;
+  *)
+    wechat "$@"
+    ;;
+  esac
+}
+
+run() {
+  core "$@"
+}
+
+run "$@"
