@@ -53,11 +53,7 @@ install() {
 
     case $DESKTOP_CORE_VERSION in
     latest | v3.8.4)
-      case $arch in
-      arm64 | amd64)
-        cache_file_checksum_expect="9fa18ccd04bf1b7bed0311613c11c6b52f67f24193a211af92482f65ff745446"
-        ;;
-      esac
+      cache_file_checksum_expect="a9dcb2fdf5db9323aa7d410721e44d32b31b46a32bbb721f4508f0a2c0f02a9c"
       ;;
     esac
 
@@ -91,18 +87,15 @@ install() {
     os::download $cache_file $url
   fi
 
+  if [ -d "/Applications/WeChat.app" ]; then
+    log::info "[$(timestamp)][desktop][$name] found installed app at /Applications/WeChat.app, clean ..."
+    rm -rf "/Applications/WeChat.app"
+  fi
+
   local app_name="WeChat.app"
   # install
   log::info "[$(timestamp)][desktop][$name] installing $cache_file ..."
-  case $arch in
-    install::dmg $cache_file ${name} "${app_name}" "/Volumes/WeChat"
-    # install::zip $cache_file iTerm2 iTerm.app
-    ;;
-  *)
-    log::error "[$(timestamp)] unsupport arch: $arch"
-    return 1
-    ;;
-  esac
+  install::dmg $cache_file ${name} "${app_name}" "/Volumes/微信 WeChat"
 
   # actve
   log::info "[$(timestamp)][desktop] active app without warning which app is damaged and can't be opened ..."
